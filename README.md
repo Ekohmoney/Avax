@@ -37,7 +37,8 @@ The `burn` function allows token holders to `burn` a specified amount of their o
 
 ### `decimals()`
 
-```function decimals() public view virtual override returns (uint8)
+```
+function decimals() public view virtual override returns (uint8)
 
 ```
 
