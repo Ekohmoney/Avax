@@ -1,45 +1,49 @@
-# MyToken Smart Contract
+# DegenToken and DegenNft Contracts
 
 ## Overview
 
-This Ethereum smart contract, named MyToken, is an ERC-20 token contract that extends the OpenZeppelin ERC20 implementation. The contract is released under the MIT License.
+The DegenToken and DegenNft contracts are Ethereum smart contracts written in Solidity. They are released under the MIT License.
 
 ## License
 
 This contract is licensed under the terms of the MIT License. See [LICENSE](LICENSE) for more details.
 
-## Token Information
+## DegenNft Contract
 
-- **Name:** EkohToken
-- **Symbol:** EKO
+### Features
 
-## Functions
+- Mint unique non-fungible tokens (NFTs) with the DegenNft contract.
+- Each NFT has a unique tokenId.
 
-### `constructor()`
+### Usage
 
-The constructor function initializes the ERC20 token with the name "EkohToken" and symbol "EKO" using the OpenZeppelin ERC20 constructor.
-
-### `mint(address _to, uint _amount)`
+1. Deploy the DegenNft contract on the Ethereum blockchain.
+2. Mint NFTs by calling the `mint` function and providing the recipient's address.
 
 ```solidity
-function mint(address _to, uint _amount) external
+// Example usage of DegenNft contract
+DegenNft degenNft = new DegenNft();
+degenNft.mint(addressTo);
 ```
 
-The mint function allows the contract owner to mint a specified amount of tokens and send them to the provided address (\_to).
+## DegenToken Contract
 
-### `burn(uint _amount)`
+### Features
+
+- Mint fungible tokens with the DegenToken contract.
+- Burn tokens and redeem NFTs based on the token balance.
+
+### Usage
+
+- Deploy the DegenToken contract on the Ethereum blockchain, providing the address of the DegenNft contract.
+- Mint tokens by calling the mint function (only allowed for the contract owner).
+- Burn tokens by calling the burn function.
+- Redeem an NFT by calling the redeem function (requires a token balance equal to the set price).
 
 ```
-function burn(uint _amount) public
+// Example usage of DegenToken contract
+DegenToken degenToken = new DegenToken(addressOfDegenNft);
+degenToken.mint(amount);
+degenToken.burn(amount);
+degenToken.redeem();
 ```
-
-The `burn` function allows token holders to `burn` a specified amount of their own tokens. It checks if the sender has sufficient funds before performing the `burn` operation.
-
-### `decimals()`
-
-```
-function decimals() public view virtual override returns (uint8)
-
-```
-
-The decimals function returns the number of decimals used to represent token balances. In this case, it returns 0.
