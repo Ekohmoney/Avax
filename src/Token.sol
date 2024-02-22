@@ -4,11 +4,18 @@ pragma solidity 0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract MyToken is ERC20 {
+    address owner;
 
     constructor() ERC20("EkohToken", "EKO") {
+        owner = msg.sender;
     }
 
-    function mint(address _to, uint _amount) external {
+    modifier onlyOwner() {
+        require(owner == msg.sender);
+        _;
+    }
+
+    function mint(address _to, uint _amount) external onlyOwner {
         _mint(_to, _amount);
     }
 
